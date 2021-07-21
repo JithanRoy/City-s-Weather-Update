@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <title>Temperature Hot</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <style>
+            body {
+                background: url(images/bg-image.jpg) no-repeat;
+                background-size: cover;
+                height: 100vh;
+            }
+        </style>
+    </head>
+
+    <body>
+                <div class="container">
+                    <form class="col-md-6 m-auto py-5">
+                        <div class="input-group mb-3">
+                            <input id="city-name" type="text" class="form-control" placeholder="Enter a location for Weather ...">
+                            <div class="input-group-append">
+                                <button id="checkWeather" type="button" class="btn btn-danger">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="weather-status text-white text-center">
+                        <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+                        <h1 id="cityNameDisplay">Dhaka</h1>
+                        <h3 id="temp"><span>38.06</span>&deg;C</h3>
+                        <h1 id="weather" class="lead">Clouds</h1>
+                    </div>
+                </div>
+
+                <script>
+                    const cityname = document.getElementById('cityNameDisplay');
+                    const temp = document.getElementById('temp');
+                    const weatherUpdate= document.getElementById('weather');
+
+                    const weatherStatus = document.getElementById('checkWeather').addEventListener('click', (event)=> {
+                        const cityName = document.getElementById('city-name').value;
+                        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=39e10f512f7dddda7054ff13a7f26403`)
+                        .then(res => res.json())
+                        .then(data => {
+                            cityname.innerHTML = cityName;
+                            temp.innerHTML = data.main.temp;
+                            weatherUpdate.innerHTML = data.weather[0].main;
+
+                        })
+                    });
+
+
+                    
+
+                </script>
+
+    </body>
+
+</html>
